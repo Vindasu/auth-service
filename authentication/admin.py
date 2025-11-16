@@ -7,7 +7,7 @@ User = get_user_model()
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     """
-    Simplified User admin configuration that works with Python 3.14.
+    Admin interface for the custom User model.
     
     This provides basic user management through the Django admin interface.
     """
