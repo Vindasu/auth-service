@@ -28,7 +28,7 @@ class UserRegistrationView(APIView):
         "email": "dontbanjo@pls.com", 
         "password": "redemption!",
         "password_confirm": "redemption!",
-        "first_name": "Jo",  // optional
+        "first_name": "Jo",        // optional
         "last_name": "Sephine"     // optional
     }
 
