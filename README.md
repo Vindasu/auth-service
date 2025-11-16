@@ -26,7 +26,7 @@ response = requests.post(
 response = requests.post(
     'http://127.0.0.1:8000/auth/login/',
     json={
-        'login': 'username_or_email@example.com',  # Can be either!
+        'login': 'username_or_email@example.com',  # Can be either username or email currently, will probably switch to username only later.
         'password': 'secure_password'
     },
     headers={'Content-Type': 'application/json'}
@@ -146,7 +146,7 @@ else:
 | PUT | `/auth/user/` | Update user profile |
 | POST | `/auth/change-password/` | Change user password |
 
-### Example API Usage
+### Example API Usage (Streamlined version)
 
 #### 1. Register a New User
 ```http
@@ -270,9 +270,9 @@ const response = await fetch('http://127.0.0.1:8000/auth/login/', {
 
 This project uses **SQLite** by default because it's built in to Django and works fine for testing:
 - **No setup required** - Database file (`db.sqlite3`) is created automatically
-- **Perfect for development** and small to medium applications
+- **Works 'good enough' for development** and small to medium applications but again I'll probably upgrade soon.
 - **Easy to backup** - Just copy the `db.sqlite3` file
-- **Can upgrade later** - Easy migration to PostgreSQL or MySQL when needed
+- **Will upgrade later** - Easy migration to PostgreSQL or MySQL when needed
 
 ## Development
 
@@ -297,17 +297,6 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-## Production Deployment
-
-For production deployment/when integrating independently:
-
-1. **Change the SECRET_KEY** in `settings.py`
-2. **Set DEBUG = False**
-3. **Update ALLOWED_HOSTS** with your domain
-4. **Configure a production database** (PostgreSQL recommended but I'll probably shop around later and configure it for all of us)
-5. **Set up proper CORS origins** (remove CORS_ALLOW_ALL_ORIGINS depending on framework this might look different)
-6. **Use environment variables** for sensitive settings/api keys/etc
-7. **Set up HTTPS** for secure token transmission
 
 ## Dependencies
 
@@ -338,3 +327,13 @@ After getting the basic auth service running:
 5. **Set up proper logging** I haven't figured out if this should go to a text file but usually I manage this in a VRM but we're using
 a SQL equivalent so I'll have to look into this.
 6. **Configure production database** when ready to deploy let me know your preferred deployment location. 
+
+## Future Production/Deployment considerations:
+
+1. **Change the SECRET_KEY** in `settings.py`
+2. **Set DEBUG = False**
+3. **Update ALLOWED_HOSTS** with your domain
+4. **Configure a production database** (PostgreSQL recommended but I'll probably shop around later and configure it for all of us)
+5. **Set up proper CORS origins** (remove CORS_ALLOW_ALL_ORIGINS depending on framework this might look different)
+6. **Use environment variables** for sensitive settings/api keys/etc
+7. **Set up HTTPS** for secure token transmission
