@@ -14,8 +14,9 @@ A Django REST API microservice for user authentication and management. This serv
 - **Admin Interface**: Django admin panel for user management (coolest django feature imo)
 
 ### Prerequisites
-- Python 3.8 or higher
-- Git (optional)
+- Python 3.14 (we're using the latest now)
+- Django 5.2.8+ (required for Python 3.14 compatibility and earlier versions won't work)
+- Git (optional but please use if making changes) 
 
 ### Setup Instructions
 
