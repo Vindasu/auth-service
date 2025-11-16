@@ -124,7 +124,7 @@ GET /auth/user/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 ```
 
-## Integration Examples - Flutter/Flask/JS
+## Integration Examples - Flutter/Flask/JS/Logan I'll add yours later!
 
 ### Flutter Integration
 ```dart
@@ -162,9 +162,9 @@ const response = await fetch('http://127.0.0.1:8000/auth/login/', {
 - **Input Validation**: All API inputs are validated and sanitized
 - **SQL Injection Protection**: Django ORM provides automatic protection
 
-## Database
+## Database (will update later)
 
-This project uses **SQLite** by default:
+This project uses **SQLite** by default because it's built in to Django and works fine for testing:
 - **No setup required** - Database file (`db.sqlite3`) is created automatically
 - **Perfect for development** and small to medium applications
 - **Easy to backup** - Just copy the `db.sqlite3` file
@@ -172,12 +172,13 @@ This project uses **SQLite** by default:
 
 ## Development
 
-### Running Tests
+### Running Tests (will add testing later)
+This doesn't work right now but it'll be the superuser testing script
 ```bash
 python manage.py test
 ```
 
-### Accessing Admin Panel
+### Accessing Admin Panel 
 1. Make sure you created a superuser account: `python manage.py createsuperuser`
 2. Start the server: `python manage.py runserver`
 3. Visit: `http://127.0.0.1:8000/admin/`
@@ -191,7 +192,7 @@ python manage.py migrate
 
 ## Production Deployment
 
-For production deployment:
+For production deployment/when integrating independently:
 
 1. **Change the SECRET_KEY** in `settings.py`
 2. **Set DEBUG = False**
