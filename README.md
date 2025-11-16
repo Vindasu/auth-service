@@ -1,4 +1,4 @@
-# SkillBoard Auth Service
+# Auth Service
 
 A Django REST API microservice for user authentication and management. This service handles user registration, login, and JWT token management for the coolest 361 group and their desktop applications.
 
