@@ -133,7 +133,7 @@ else:
 2. **Login:** Client → POST /auth/login/ → API → Authenticate → JWT tokens → Response  
 3. **Get Profile:** Client → GET /auth/user/ → API → Verify token → Database → Response
 
-## API Endpoints - IMPORTANT
+## API Endpoints 
 
 ### Authentication Endpoints
 
@@ -142,8 +142,8 @@ else:
 | POST | `/auth/register/` | Register a new user account |
 | POST | `/auth/login/` | Login with username/email and password |
 | POST | `/auth/token/refresh/` | Refresh JWT access token |
-| GET | `/auth/user/` | Get current user information |
-| PUT | `/auth/user/` | Update user profile |
+| GET  | `/auth/user/` | Get current user information |
+| PUT  | `/auth/user/` | Update user profile |
 | POST | `/auth/change-password/` | Change user password |
 
 ### Example API Usage (Streamlined version)

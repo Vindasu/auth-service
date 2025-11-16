@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-CS 361 Auth Service Test Program - Simple Version
-Author: Alexander Adams, Group 64
+Auth Service Test Program 
 """
 
 import requests
