@@ -6,10 +6,15 @@ from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
-
+"""
+Serializers in django are basically what I'm using to convert Django model objects to json and vise versa so 
+our frameworks on the front end can understand them. If you have a specific object/json structure you want to
+have implemented/have accessible, do it here or let me know and I can add it.
+"""
 class UserRegistrationSerializer(serializers.ModelSerializer):
     """
-    Serializer for user registration.
+    Serializer for user registration, converts JSON (your app will need to send JSON data to it)
+    to the Django USER model so the database can store it and the Django app can use it natively.
     
     Handles creating new users with username, email, and password.
     Validates that username and email are unique.
@@ -18,7 +23,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         write_only=True, 
         min_length=8,
         style={'input_type': 'password'},
-        help_text="Password must be at least 8 characters long."
+        help_text="Password must be at least 8 characters long." 
+        # I'll add stronger password requirements later so we don't have to type complicated passwords during testing
     )
     password_confirm = serializers.CharField(
         write_only=True,
@@ -49,7 +55,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         
         if User.objects.filter(email__iexact=value).exists():
             raise serializers.ValidationError("A user with this email already exists.")
-        return value.lower()  # Store emails in lowercase
+        # Store emails in lowercase because they are case-insensitive by default and phones are finnicky with case
+        return value.lower()  
     
     def validate(self, attrs):
         """Validate that both passwords match."""
@@ -61,7 +68,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
                 'password_confirm': 'Passwords do not match.'
             })
         
-        # Use Django's password validators
+        # Use Django's builtin password validators for simplicity, we can upgrade later if needed
         try:
             validate_password(password)
         except ValidationError as e:

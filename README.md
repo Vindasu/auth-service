@@ -2,6 +2,70 @@
 
 A Django REST API microservice for user authentication and management. This service handles user registration, login, and JWT token management for the coolest 361 group and their desktop applications.
 
+## Communication Contract 
+
+### How to REQUEST Data from This Microservice
+
+**Base URL:** `http://127.0.0.1:8000`
+
+```python
+# Example: Register new user
+import requests
+response = requests.post(
+    'http://127.0.0.1:8000/auth/register/',
+    json={
+        'username': 'your_username',
+        'email': 'user@example.com', 
+        'password': 'secure_password',
+        'password_confirm': 'secure_password'
+    },
+    headers={'Content-Type': 'application/json'}
+)
+
+# Example: Login with username OR email
+response = requests.post(
+    'http://127.0.0.1:8000/auth/login/',
+    json={
+        'login': 'username_or_email@example.com',  # Can be either!
+        'password': 'secure_password'
+    },
+    headers={'Content-Type': 'application/json'}
+)
+
+# Example: Get user profile (requires JWT token)
+response = requests.get(
+    'http://127.0.0.1:8000/auth/user/',
+    headers={
+        'Authorization': 'Bearer YOUR_JWT_ACCESS_TOKEN',
+        'Content-Type': 'application/json'
+    }
+)
+```
+
+### How to RECEIVE Data from This Microservice
+
+```python
+# Registration Response
+if response.status_code == 201:
+    data = response.json()
+    access_token = data['access']      # JWT access token (1 hour)
+    refresh_token = data['refresh']    # JWT refresh token (7 days) 
+    user_info = data['user']          # User profile data
+    print(f"User created: {user_info['username']}")
+else:
+    errors = response.json()  # Validation errors
+
+# Login Response 
+if response.status_code == 200:
+    data = response.json()
+    access_token = data['access']      # Use for authenticated requests
+    refresh_token = data['refresh']    # Use to get new access tokens
+    user_data = data['user']
+    print(f"Login successful for: {user_data['username']}")
+else:
+    print("Login failed:", response.json())
+```
+
 ## Features
 
 - **Dual Login Support**: Users can login with either username OR email
@@ -61,6 +125,13 @@ A Django REST API microservice for user authentication and management. This serv
    ```
    
    The API will be available at: `http://127.0.0.1:8000/`
+
+### Communication Flow
+
+**UML sequence:**
+1. **Register:** Client → POST /auth/register/ → API → Database → JWT tokens → Response
+2. **Login:** Client → POST /auth/login/ → API → Authenticate → JWT tokens → Response  
+3. **Get Profile:** Client → GET /auth/user/ → API → Verify token → Database → Response
 
 ## API Endpoints - IMPORTANT
 
@@ -125,6 +196,38 @@ GET /auth/user/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 ```
 
+## Test Program
+
+**File:** `test_auth_service.py` - Complete test program for Sprint 2.6
+
+```bash
+python test_auth_service.py
+```
+
+**What it tests:**
+- Service connectivity check
+- User registration via API
+- Login with username
+- Login with email (dual login capability)
+- Authenticated profile retrieval  
+- JWT token refresh
+
+**Sample Output:**
+```
+AUTH SERVICE MICROSERVICE TEST PROGRAM
+CS 361 - Sprint 2.6 Implementation
+
+REQUEST: POST /auth/register/
+RESPONSE: 201 {"access": "jwt_token", "user": {...}}
+User registration successful!
+
+REQUEST: POST /auth/login/  
+RESPONSE: 200 {"access": "jwt_token", "user": {...}}
+Login with username successful!
+```
+
+Above shows how other microservices can communicate with the auth service!
+
 ## Integration Examples - Flutter/Flask/JS/Logan I'll add yours later!
 
 ### Flutter Integration
@@ -173,9 +276,12 @@ This project uses **SQLite** by default because it's built in to Django and work
 
 ## Development
 
-### Running Tests (will add testing later)
-This doesn't work right now but it'll be the superuser testing script
+### Running Tests
 ```bash
+# CS 361 Assignment Test Program
+python test_auth_service.py
+
+# Django Unit Tests (will add more later)
 python manage.py test
 ```
 
