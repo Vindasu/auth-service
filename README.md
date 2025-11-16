@@ -262,7 +262,7 @@ const response = await fetch('http://127.0.0.1:8000/auth/login/', {
 - **Password Validation**: Minimum 8 characters with complexity requirements
 - **JWT Tokens**: Secure, stateless authentication
 - **Token Rotation**: Refresh tokens are rotated for enhanced security
-- **CORS Protection**: Configured for your specific Flutter app domains
+- **CORS Protection**: Currently configured for Alex's flutter app but will have to update
 - **Input Validation**: All API inputs are validated and sanitized
 - **SQL Injection Protection**: Django ORM provides automatic protection
 
