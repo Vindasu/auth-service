@@ -126,12 +126,39 @@ else:
    
    The API will be available at: `http://127.0.0.1:8000/`
 
-### Communication Flow
+### UML Sequence Diagram
 
-**UML sequence:**
-1. **Register:** Client → POST /auth/register/ → API → Database → JWT tokens → Response
-2. **Login:** Client → POST /auth/login/ → API → Authenticate → JWT tokens → Response  
-3. **Get Profile:** Client → GET /auth/user/ → API → Verify token → Database → Response
+```mermaid
+sequenceDiagram
+    participant Client as Test Program
+    participant API as Auth API
+    participant DB as Database
+    participant JWT as JWT Service
+
+    Note over Client,JWT: User Registration Flow
+    Client->>+API: POST /auth/register/
+    API->>+DB: Validate & Create User
+    DB-->>-API: User Created
+    API->>+JWT: Generate Tokens
+    JWT-->>-API: Access & Refresh Tokens
+    API-->>-Client: 201: {tokens, user}
+
+    Note over Client,JWT: User Login Flow
+    Client->>+API: POST /auth/login/
+    API->>+DB: Authenticate User
+    DB-->>-API: User Verified
+    API->>+JWT: Generate Tokens
+    JWT-->>-API: Access & Refresh Tokens
+    API-->>-Client: 200: {tokens, user}
+
+    Note over Client,JWT: Profile Retrieval Flow
+    Client->>+API: GET /auth/user/ (JWT Token)
+    API->>+JWT: Verify Token
+    JWT-->>-API: Token Valid
+    API->>+DB: Get User Profile
+    DB-->>-API: User Data
+    API-->>-Client: 200: {user_profile}
+```
 
 ## API Endpoints 
 
