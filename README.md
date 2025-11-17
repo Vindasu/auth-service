@@ -208,7 +208,7 @@ python test_auth_service.py
 - Service connectivity check
 - User registration via API
 - Login with username
-- Login with email (dual login capability)
+- Login with email 
 - Authenticated profile retrieval  
 - JWT token refresh
 
@@ -225,8 +225,6 @@ REQUEST: POST /auth/login/
 RESPONSE: 200 {"access": "jwt_token", "user": {...}}
 Login with username successful!
 ```
-
-Above shows how other microservices can communicate with the auth service!
 
 ## Integration Examples - Flutter/Flask/JS/Logan I'll add yours later!
 

@@ -12,7 +12,9 @@ base_url = "http://127.0.0.1:8000"
 
 # 1. Register user
 print("\n1. Register new user")
-user_data = {"username": "test_alex", "email": "test@coolio.com", "password": "Secure!", "password_confirm": "Secure!"}
+import random
+username = f"demo_user_{random.randint(1000, 9999)}"
+user_data = {"username": username, "email": f"{username}@demo.com", "password": "DemoPass123!", "password_confirm": "DemoPass123!"}
 response = requests.post(f"{base_url}/auth/register/", json=user_data)
 print(f"   Request: POST {base_url}/auth/register/")
 print(f"   Status Code: {response.status_code}")
@@ -27,7 +29,7 @@ else:
 
 # 2. Login 
 print("\n2. Login with credentials")
-login_data = {"login": "test_alex", "password": "Secure!"}
+login_data = {"login": username, "password": "DemoPass123!"}
 response = requests.post(f"{base_url}/auth/login/", json=login_data)
 print(f"   Request: POST {base_url}/auth/login/")
 print(f"   Status Code: {response.status_code}")
