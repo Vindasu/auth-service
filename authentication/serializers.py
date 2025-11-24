@@ -24,7 +24,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         min_length=8,
         style={'input_type': 'password'},
         help_text="Password must be at least 8 characters long." 
-        # I'll add stronger password requirements later so we don't have to type complicated passwords during testing
+        # TODO: I'll add stronger password requirements later so we don't have to type complicated passwords during testing
     )
     password_confirm = serializers.CharField(
         write_only=True,
@@ -68,7 +68,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
                 'password_confirm': 'Passwords do not match.'
             })
         
-        # Use Django's builtin password validators for simplicity, we can upgrade later if needed
+        # TODO:Use Django's builtin password validators for simplicity, we can upgrade later if needed
         try:
             validate_password(password)
         except ValidationError as e:

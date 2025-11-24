@@ -56,7 +56,7 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     """
-    Login with username or email and password - might update later to username only but will consult with 361 team.
+    TODO:Login with username or email and password - might update later to username only but will consult with 361 team.
     
     POST /auth/login/
     {
